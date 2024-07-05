@@ -1,0 +1,26 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model user {
+  id            String  @id @db.VarChar(72)
+  role          String  @db.VarChar(20)
+  username      String  @db.VarChar(32)
+  password      String  @db.VarChar(72)
+  nama          String  @db.VarChar(32)
+  email         String  @db.VarChar(32)
+  true_password String? @map("true password") @db.VarChar(32)
+  absen         absen[]
+}
+
+model absen {
+  id       String   @id(map: "absen_pk") @db.VarChar(72)
+  id_user  String   @db.VarChar(72)
+  absen_at DateTime @default(now()) @db.Timestamptz(6)
+  user     user     @relation(fields: [id_user], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "absen_user_fk")
+}
