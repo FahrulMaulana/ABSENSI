@@ -4,6 +4,7 @@ import { NestExpressApplication } from '@nestjs/platform-express'
 import { join } from 'path'
 import { env } from 'process'
 import { AppModule } from './app.module'
+
 import { SwaggerApiDocs } from './docs/swagger-api.docs'
 
 async function bootstrap() {
@@ -25,6 +26,12 @@ async function bootstrap() {
   if (env.APP_ENV !== 'prod') {
     new SwaggerApiDocs(app).init()
   }
+
+  app.enableCors({
+    origin: 'http://localhost:3000', // Replace with your frontend's URL
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+  })
 
   await app.listen(5000)
 
