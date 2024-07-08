@@ -48,3 +48,19 @@ export class GetUserDTO {
   @IsEmail()
   email: string
 }
+
+export class EditProfile {
+  @Expose()
+  @ApiProperty({ description: 'Nama pengguna untuk login' })
+  @IsString()
+  username: string
+
+  @Expose()
+  @ApiProperty({ description: 'Nama asli pengguna' })
+  @IsString()
+  nama: string
+
+  @Expose()
+  @ApiProperty({ description: 'Email pengguna' })
+  email: string
+}

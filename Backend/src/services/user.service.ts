@@ -1,7 +1,8 @@
 import { Injectable } from '@nestjs/common'
 import * as bcrypt from 'bcrypt'
 import { ERole } from 'src/common/enums/ERole'
-import { CreateUserDTO } from 'src/dto/user.dto'
+import { UserPayload } from 'src/common/interfaces/UserPayload'
+import { CreateUserDTO, EditProfile } from 'src/dto/user.dto'
 import { v4 as uuidv4 } from 'uuid'
 import { PrismaService } from './prisma.service'
 
@@ -32,5 +33,37 @@ export class userService {
   async lihatuser() {
     const get = await this.prisma.user.findMany()
     return get
+  }
+
+  async userInfo(user: UserPayload) {
+    return {
+      id: user.id,
+      role: user.id_role,
+      username: user.username,
+      nama: user.nama,
+      email: user.email,
+    }
+  }
+
+  async editUser(body: EditProfile, id: string) {
+    const user = await this.prisma.user.findUnique({
+      where: {
+        id,
+      },
+    })
+
+    const data = await this.prisma.user.update({
+      where: {
+        id,
+      },
+      data: {
+        username: body.username || user.username,
+        nama: body.nama || user.nama,
+        email: body.email || user.email,
+      },
+    })
+    console.log(data)
+
+    return data
   }
 }
