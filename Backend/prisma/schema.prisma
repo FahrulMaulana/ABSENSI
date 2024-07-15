@@ -19,8 +19,18 @@ model user {
 }
 
 model absen {
-  id       String   @id(map: "absen_pk") @db.VarChar(72)
-  id_user  String   @db.VarChar(72)
-  absen_at DateTime @default(now()) @db.Timestamptz(6)
-  user     user     @relation(fields: [id_user], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "absen_user_fk")
+  id         String     @id(map: "absen_pk") @db.VarChar(72)
+  id_user    String     @db.VarChar(72)
+  absen_at   DateTime   @default(now()) @db.Timestamptz(6)
+  id_link    String     @unique(map: "absen_unique") @db.VarChar(72)
+  link_absen link_absen @relation(fields: [id_link], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "absen_link_absen_fk")
+  user       user       @relation(fields: [id_user], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "absen_user_fk")
+}
+
+model link_absen {
+  id    String    @id(map: "link_absen_pk") @db.VarChar(72)
+  link  String    @db.VarChar
+  awal  DateTime? @default(now()) @db.Timestamptz(6)
+  akhir DateTime  @db.Timestamptz(6)
+  absen absen?
 }
