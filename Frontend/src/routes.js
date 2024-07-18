@@ -38,6 +38,11 @@ const Validation = React.lazy(() => import('./views/forms/validation/Validation'
 
 const Charts = React.lazy(() => import('./views/charts/Charts'))
 
+//user
+const Generate = React.lazy(() => import('./views/user/Generate'))
+const Scan = React.lazy(() => import('./views/user/Scan'))
+const Absen = React.lazy(() => import('./views/user/ListAbsen'))
+
 // Icons
 const CoreUIIcons = React.lazy(() => import('./views/icons/coreui-icons/CoreUIIcons'))
 const Flags = React.lazy(() => import('./views/icons/flags/Flags'))
@@ -55,6 +60,9 @@ const routes = [
   { path: '/', exact: true, name: 'Home' },
   { path: '/dashboard', name: 'Dashboard', element: Dashboard },
   { path: '/user', name: 'User', element: User },
+  { path: '/user/generate', name: 'Generate', element: Generate },
+  { path: '/user/scan', name: 'Scan', element: Scan },
+  { path: '/user/absen', name: 'Absen', element: Absen },
   { path: '/theme', name: 'Theme', element: Colors, exact: true },
   { path: '/theme/colors', name: 'Colors', element: Colors },
   { path: '/theme/typography', name: 'Typography', element: Typography },

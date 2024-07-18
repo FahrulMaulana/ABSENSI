@@ -27,6 +27,10 @@ const _nav = [
     },
   },
   {
+    component: CNavTitle,
+    name: 'User',
+  },
+  {
     component: CNavItem,
     name: 'User',
     to: '/user',
@@ -35,6 +39,24 @@ const _nav = [
       color: 'info',
       text: 'NEW',
     },
+  },
+  {
+    component: CNavItem,
+    name: 'Generate',
+    to: '/user/generate',
+    icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
+  },
+  {
+    component: CNavItem,
+    name: 'Scan',
+    to: '/user/scan',
+    icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
+  },
+  {
+    component: CNavItem,
+    name: 'Absen',
+    to: '/user/absen',
+    icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
   },
   {
     component: CNavTitle,
